@@ -1,4 +1,4 @@
-var map = L.map('map').setView([34.159, -118.38], 12);
+var map = L.map('map').setView([34.159, -118.38], 11.5);
 var basemap =L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 	subdomains: 'abcd',
@@ -119,7 +119,7 @@ var collisions2021 = new L.GeoJSON.AJAX("layers/2021collisions.geojson", {
 })
 
 
-var markerClusters = L.markerClusterGroup({ disableClusteringAtZoom: 13 }).addTo(map);
+var markerClusters = L.markerClusterGroup({ maxClusterRadius: 30}).addTo(map);
 
 var collisions2022 = new L.GeoJSON.AJAX("layers/2022collisions.geojson", {
     onEachFeature: bindPointPopups,
@@ -220,3 +220,72 @@ fetch(heatmapURL)
         markerClusters.removeLayer(collisions2022)
     }
  })
+
+//add legend
+
+var legend = L.control({position: 'bottomleft'});
+
+legend.onAdd = function (map) {
+
+    var div = L.DomUtil.create("div", "legend")
+    div.innerHTML += "<h4>Legend</h4>"
+    return div
+};
+
+legend.addTo(map);
+
+// add clickable zoom buttons
+resedaVanowen = document.getElementById("rv")
+resedaVanowen.addEventListener("click", function (event) {
+    map.setView([34.193, -118.536], 15)  
+})
+
+resedaSaticoy = document.getElementById("rs")
+resedaSaticoy.addEventListener("click", function (event) {
+    map.setView([34.208, -118.536], 15)  
+})
+
+venturaVanNuys = document.getElementById("vv")
+venturaVanNuys.addEventListener("click", function (event) {
+    map.setView([34.151, -118.448], 15)  
+})
+
+highlandFranklin = document.getElementById("hf")
+highlandFranklin.addEventListener("click", function (event) {
+    map.setView([34.104, -118.338], 16)  
+})
+
+burbankVanNuys= document.getElementById("bv")
+burbankVanNuys.addEventListener("click", function (event) {
+    map.setView([34.172, -118.448], 16)  
+})
+
+
+// add modal info buttons
+
+btns = document.querySelectorAll("button.modalButton")
+modals = document.querySelectorAll('.modal')
+spans = document.getElementsByClassName("close")
+
+// When the user clicks the button, open the modal
+for (i = 0; i < btns.length; i++) {
+    btns[i].onclick = function(e) {
+       e.preventDefault(); 
+       modal = document.querySelector(e.target.getAttribute("href"));
+       modal.style.display = "block";
+    }
+}
+for (var i = 0; i < spans.length; i++) {
+    spans[i].onclick = function() {
+       for (var index in modals) {
+         if (typeof modals[index].style !== 'undefined') modals[index].style.display = "none";    
+       }
+    }
+}
+window.onclick = function(event) {
+    if (event.target.classList.contains('modal')) {
+     for (var index in modals) {
+      if (typeof modals[index].style !== 'undefined') modals[index].style.display = "none";    
+     }
+    }
+}

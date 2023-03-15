@@ -2,7 +2,9 @@
 <head>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-    crossorigin=""/>
+    crossorigin=""/> 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
     crossorigin=""></script>
@@ -13,12 +15,64 @@
     <script src="https://unpkg.com/georaster-layer-for-leaflet/dist/georaster-layer-for-leaflet.min.js"></script>
     <script src="https://unpkg.com/chroma-js"></script>
     <script src="trianglemarker.js"></script>
-    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>"
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
-    </head>
-<body>
-    <h1 style = "text-align: center;">CD4 Bike and Pedestrian Collisions (2019-2022)</h1>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+</head>
+<body style = "font-family: Helvetica">
+    <p style = "text-align: center;font-size:x-large;">CD4 Bike and Pedestrian Collisions (2019-2022)</p>
     <div id="map"></div>
+    <h2 style = "text-align: center;"> Most Dangerous Intersections Since 2019 (Click to Zoom)</h2>
+    <div class = "wrapper"> 
+        <div>
+            <button class = "button" id = "rv" ><b>Reseda & Vanowen (12 Crashes)</b></button>
+            <button class = "modalButton" href = "#rvReport">Read Intersection Report</button>
+            <div id = "rvReport" class = "modal">
+                <div class = "modalContent">
+                    <span class="close">&times;</span>
+                    <h2>Reseda & Vanowen: Intersection Report</h2>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button class = "button" id = "rs"><b>Reseda & Saticoy (12 Crashes)</b></button>
+            <button class = "modalButton" href = "#rsReport">Read Intersection Report</button>
+            <div id = "rsReport" class = "modal">
+                <div class = "modalContent">
+                    <span class="close">&times;</span>
+                    <b>Reseda & Saticoy: Intersection Report</b>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button class = "button" id = "vv"><b>Ventura & Van Nuys (8 Crashes)</b></button>
+            <button class = "modalButton" href = "#vvReport">Read Intersection Report</button>
+            <div id = "vvReport" class = "modal">
+                <div class = "modalContent">
+                    <span class="close">&times;</span>
+                    <b>Ventura & Van Nuys: Intersection Report</b>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button class = "button" id = "hf"><b>Highland & Franklin (7 Crashes)</b></button>
+            <button class = "modalButton" href = "#hfReport">Read Intersection Report</button>
+            <div id = "hfReport" class = "modal">
+                <div class = "modalContent">
+                    <span class="close">&times;</span>
+                    <b>Highland & Franklin: Intersection Report</b>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button class = "button" id = "bv"><b>Burbank & Van Nuys (7 Crashes)</b></button>
+            <button class = "modalButton" href = "#bvReport">Read Intersection Report</button>
+            <div id = "bvReport" class = "modal">
+                <div class = "modalContent">
+                    <span class="close">&times;</span>
+                    <b>Burbank & Van Nuys: Intersection Report</b>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src = "script.js"></script>
 </body>
+</html>
