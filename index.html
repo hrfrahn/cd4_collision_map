@@ -17,8 +17,17 @@
     <script src="trianglemarker.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 </head>
-<body style = "font-family: Helvetica">
-    <p style = "text-align: center;font-size:x-large;">CD4 Bike and Pedestrian Collisions (2019-2022)</p>
+<body>
+    <p style = "text-align: center;font-size:x-large; margin-bottom: 1%;">CD4 Bike and Pedestrian Collisions (2019-2022)</p>
+    <div style="text-align: center;"">   
+        <button class = "modalButton" href = "#projectBackground" style = "margin: 0%; margin-bottom: 1%;">Project Background</button>
+        <div id ="projectBackground" class="modal">
+            <div class = "modalContent">
+                <span class="close">&times;</span>
+                <h2>Project Background</h2>
+            </div> 
+        </div>
+    </div>
     <div id="map"></div>
     <h2 style = "text-align: center;"> Most Dangerous Intersections Since 2019 (Click to Zoom)</h2>
     <div class = "wrapper"> 
@@ -29,6 +38,9 @@
                 <div class = "modalContent">
                     <span class="close">&times;</span>
                     <h2>Reseda & Vanowen: Intersection Report</h2>
+                    <img src = "pics/reseda_vanowen_full.JPG" width="70%" height="30%">
+                    <p class = "caption">Looking north along Reseda Blvd from the intersection of Reseda & Vanowen</p>
+                    <p class="reportText">Fill in w report text</p>
                 </div>
             </div>
         </div>
@@ -38,7 +50,8 @@
             <div id = "rsReport" class = "modal">
                 <div class = "modalContent">
                     <span class="close">&times;</span>
-                    <b>Reseda & Saticoy: Intersection Report</b>
+                    <h2>Reseda & Saticoy: Intersection Report</h2>
+                    <img src = "pics/resedaSaticoy.JPG" width="70%" height="30%">
                 </div>
             </div>
         </div>
@@ -48,7 +61,8 @@
             <div id = "vvReport" class = "modal">
                 <div class = "modalContent">
                     <span class="close">&times;</span>
-                    <b>Ventura & Van Nuys: Intersection Report</b>
+                    <h2>Ventura & Van Nuys: Intersection Report</h2>
+                    <img src = "pics/venturaVN.JPG" width="70%" height="30%">
                 </div>
             </div>
         </div>
@@ -58,7 +72,7 @@
             <div id = "hfReport" class = "modal">
                 <div class = "modalContent">
                     <span class="close">&times;</span>
-                    <b>Highland & Franklin: Intersection Report</b>
+                    <h2>Highland & Franklin: Intersection Report</h2>
                 </div>
             </div>
         </div>
@@ -68,7 +82,8 @@
             <div id = "bvReport" class = "modal">
                 <div class = "modalContent">
                     <span class="close">&times;</span>
-                    <b>Burbank & Van Nuys: Intersection Report</b>
+                    <h2>Burbank & Van Nuys: Intersection Report</h2>
+                    <img src = "pics/burbankVN.JPG" width="70%" height="30%">
                 </div>
             </div>
         </div>
