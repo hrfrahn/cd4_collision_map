@@ -12,7 +12,43 @@ function bindBoundaryPopups(feature, layer) {
 }
 function bindPointPopups(feature, layer) {
     if (feature.properties) {
-        layer.bindPopup("<b>Date: "+feature.properties["Date Occurred"]+"<br>Age: "+feature.properties["Victim Age"]);
+        timeStr = feature.properties["Time Occurred"].toString()
+        popupText = "At "+timeStr.slice(0,timeStr.length-2)+":"+timeStr.slice(timeStr.length-2,timeStr.length)+" on "+feature.properties["Date Occurred"]+", a "+feature.properties["Victim Age"]+" year old "
+        gender = ""
+        if(feature.properties["Victim Sex"]=="M"){
+            gender = "man "
+        }
+        else if(feature.properties["Victim Sex"]=="F"){
+            gender = "woman "
+        }
+        else{
+            gender = "person "
+        }
+        popupText += gender + " was hit by a car here"
+        bikePedText = ""
+        if(feature.properties["MO Codes"].includes("3003")){ //pedestrian
+            bikePedText = " while walking."
+        }
+        else if(feature.properties["MO Codes"].includes("3008")){
+            bikePedText = " while biking."
+        }
+        else{
+            bikePedText = "."
+        }
+        popupText += bikePedText
+        ksiText = ""
+        if(feature.properties["Fatal Crash"]=="True"){
+            ksiText = " They were killed in the crash."
+        }
+        else if(feature.properties["Killed\/Seriusly Injured"]=="True"){
+            ksiText = " They were seriously injured in the crash."
+        }
+        else{
+            ksiText = " Thankfully, they were not seriously hurt in the crash."
+        }
+        popupText += ksiText
+        //layer.bindPopup("<b>Date: "+feature.properties["Date Occurred"]+"<br>Age: "+feature.properties["Victim Age"]+"<br>Fatal Crash: "+feature.properties["Fatal Crash"]);
+        layer.bindPopup(popupText)
     }
 }
 
@@ -233,8 +269,22 @@ var baseMaps = {
     "None": none
 }
 
+//add control/legend
 
-var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map)
+var layerControl = L.control.layers(baseMaps, overlayMaps, {collapsed : false, position: 'topright'})
+
+layerControl.addTo(map)
+
+var legend = L.control({position: 'bottomleft'});
+
+legend.onAdd = function (map) {
+
+    var div = L.DomUtil.create("div", "legend")
+    div.innerHTML += "<b>Legend</b>" + "<br>Triangle = Pedestrian Hit by Car <br>Circle = Biker Hit by Car<br> Red = Fatal Crash"
+    return div
+};
+
+legend.addTo(map);
 
 var heatmapURL = "layers/heatmap_smallerkernels.tif"
 

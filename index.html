@@ -3,6 +3,10 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
     crossorigin=""/> 
+    <script
+			  src="https://code.jquery.com/jquery-3.6.4.min.js"
+			  integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+			  crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
@@ -10,7 +14,7 @@
     crossorigin=""></script>
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.js"></script>
     <link rel="stylesheet" href = "styles.css"/>
-    <title>Collisions Map Prototype</title>
+    <title>CD4 Collision Map</title>
     <script src="https://unpkg.com/georaster"></script>
     <script src="https://unpkg.com/georaster-layer-for-leaflet/dist/georaster-layer-for-leaflet.min.js"></script>
     <script src="https://unpkg.com/chroma-js"></script>
@@ -18,14 +22,25 @@
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 </head>
 <body>
-    <p style = "text-align: center;font-size:x-large; margin-bottom: 1%;">CD4 Bike and Pedestrian Collisions (2019-2022)</p>
-    <div style="text-align: center;"">   
-        <button class = "modalButton" href = "#projectBackground" style = "margin: 0%; margin-bottom: 1%;">Project Background</button>
-        <div id ="projectBackground" class="modal">
-            <div class = "modalContent">
-                <span class="close">&times;</span>
-                <h2>Project Background</h2>
+    <h1 style = "text-align: center; margin-bottom: 1%;">CD4 Bike and Pedestrian Collisions (2019-2022)</h1>
+    <div class = "topWrapper" style="text-align: center;">  
+        <div class = "one"></div>
+        <div class = "two">
+            <button class = "modalButton" href = "#projectBackground" style = "margin: 0%; margin-bottom: 1%;">Project Background</button>
+            <div id ="projectBackground" class="modal">
+                <div class = "modalContent">
+                    <span class="close">&times;</span>
+                    <h2>Project Background</h2>
+                    <p class="reportText">LA’s 4th Council District (CD4) stretches from San Fernando Valley communities like Sherman Oaks and Reseda, across the Hollywood Hills, and into more centrally located areas like Silver Lake and Los Feliz. The geographically and demographically diverse district contains several major thoroughfares including Ventura Blvd, Mulholland Dr, Los Feliz Blvd, and Laurel Canyon Dr, and these busy streets see many accidents that make them some of the leading contributors to traffic fatalities in the city. The Council Office has identified several locations where street improvements could help improve the safety of non-drivers, and has already completed a number of transit safety projects within the district (including bike lanes on several streets in the Valley). These plans fit in as a broader part of the citywide Vision Zero initiative, which aims to reduce traffic deaths (among drivers and non-drivers) to zero by 2025. So far, however, attempts to reduce deaths have been unsuccessful, with yearly traffic deaths nearly doubling from the 2015 baseline, mostly driven by an increase in pedestrian fatalities.  </p>
+                    <p class = "reportText">This failure has led to a renewed call for accelerated street safety programs. It’s common knowledge that Los Angeles is not exactly known for its friendliness to walking or biking; outside of small pockets of walkability, the city’s infrastructure is almost always primarily geared toward driving. This obviously makes it hard to get around without a car, but it also has a huge effect on how safe walking or biking is within our city. Almost every Angeleno has a story of how a crazy driver almost ran them off the road, but we don’t often get beyond these anecdotes when discussing how unsafe this city is for non-drivers.</p>
+                    <p class="reportText">This project aims to change that. By using LAPD traffic collision data, we can pinpoint every traffic collision that has taken place within the district going back to 2019. With this knowledge in hand, we can see exactly which intersections are most in need of improvements, which areas have the highest concentration of collisions involving bikers and pedestrians, and which areas of the district are comparatively safe for non-drivers. Through this interactive map, district residents can zoom in to their own neighborhood and get a sense of exactly how safe (or unsafe) it is for them to walk to work, for their kids to bike to school, and for their neighbors and loved ones to live car-free. My hope is that this map and the accompanying intersection reports will help increase public pressure and build the political will to make CD4 (and, eventually, LA as a whole) a great place to live even for those who don’t own a car. </p>
+                    <br><br>
+                    <p>All code, writing, and design by Harry Frahn, UCLA '23</p>
+                </div> 
             </div> 
+        </div>
+        <div class = "three">
+
         </div>
     </div>
     <div id="map"></div>
@@ -37,10 +52,18 @@
             <div id = "rvReport" class = "modal">
                 <div class = "modalContent">
                     <span class="close">&times;</span>
-                    <h2>Reseda & Vanowen: Intersection Report</h2>
+                    <h2>Reseda Blvd & Vanowen St: Intersection Report</h2>
                     <img src = "pics/reseda_vanowen_full.JPG" width="70%" height="30%">
                     <p class = "caption">Looking north along Reseda Blvd from the intersection of Reseda & Vanowen</p>
-                    <p class="reportText">Fill in w report text</p>
+                    <p class="reportText">
+                        These two busy streets meet at an intersection that has been one of CD4’s most dangerous for pedestrians over the past four years. Both streets have 6 lanes, and both are major thoroughfares that run basically the entire length of the San Fernando Valley. Although improvements like bike lanes and bus boarding islands were recently installed on this stretch of Reseda Blvd as a part of <a href = "https://ladotlivablestreets.org/projects/reseda">LADOT’s Complete Streets Program</a>, Vanowen is just as dangerous as Reseda for non-drivers. Despite Vanowen Street having actually seen more pedestrian deaths than Reseda in recent years, there has been no comparable investment in safety measures. At this intersection, pedestrians must cross a busy 6-lane road in either direction with cars constantly turning right on red. The recently installed bike lanes on Reseda are better than nothing, but as is true of many Los Angeles streets, the lanes disappear as bikers get close to the intersection (where most collisions occur) to allow cars to turn right, raising the risk for bikers in the intersection. 
+                        <br><br> <b style = "font-family: 'Quicksand', sans-serif">Potential Intersection Safety Improvements:</b>
+                    </p>
+                    <ul>
+                        <li>Invest in bike lanes on Vanowen St to match those on Reseda Blvd</li>
+                        <li>Extend Reseda Blvd bike lanes all the way to intersection</li>   
+                        <li>Install “no right on red” signs on Reseda Blvd and implement protected left turns for drivers</li>            
+                    </ul>
                 </div>
             </div>
         </div>
@@ -50,8 +73,19 @@
             <div id = "rsReport" class = "modal">
                 <div class = "modalContent">
                     <span class="close">&times;</span>
-                    <h2>Reseda & Saticoy: Intersection Report</h2>
+                    <h2>Reseda Blvd & Saticoy St: Intersection Report</h2>
                     <img src = "pics/resedaSaticoy.JPG" width="70%" height="30%">
+                    <p class = "caption">Looking north along Reseda Blvd from the intersection of Reseda & Saticoy St; note the bus boarding island on the right side of Reseda</p>
+                    <p class="reportText">
+                        At this intersection, two busy roads meet at a chaotic juncture that has been deadly for pedestrians in the past. These two major thoroughfares both have 6 lanes, and the high volume of traffic means that non-drivers are forced to constantly check for incoming vehicles even when they have the green light to cross. This intersection was chosen to benefit from <a href = "https://ladotlivablestreets.org/projects/reseda">LADOT’s Complete Streets Program</a> (as a part of a longer stretch of Reseda), but the most major change to the area was the addition of a bus boarding island on the north side of Reseda. Bike lanes were also added to Reseda Blvd, but they don’t reach all the way to the intersection in many places to allow drivers to turn right. Saticoy Street also has a higher-than-usual speed limit of 40 miles per hour, above even Reseda Boulevard’s limit of 35 mph, which is the standard for local arterial roads in Los Angeles. Finally, the presence of large surface parking lots at all four corners of the intersection means that there is a constant flow of cars pulling out into the street near into the right lane, leading to potential accidents involving bikers coming down the street who might be hard for cars to see.                        
+                        <br><br> <b style = "font-family: 'Quicksand', sans-serif">Potential Intersection Safety Improvements:</b>
+                    </p>
+                    <ul>
+                        <li>Decrease speed limit on Saticoy Street to 35 mph</li>
+                        <ul><li>A 5 mph reduction may not seem like much, but an <a href= "https://one.nhtsa.gov/people/injury/research/pub/hs809012.html">NHTSA literature review</a> found that a reduction in mean vehicle speed from 40mph to 35mph can reduce fatal crashes from 8% of all crashes to less than 5%</li></ul>
+                        <li>Redesign parking lots near intersection to increase visibility of incoming bikers</li>   
+                        <li>Extend bike lanes on Reseda to meet intersection</li>            
+                    </ul>
                 </div>
             </div>
         </div>
@@ -61,8 +95,20 @@
             <div id = "vvReport" class = "modal">
                 <div class = "modalContent">
                     <span class="close">&times;</span>
-                    <h2>Ventura & Van Nuys: Intersection Report</h2>
+                    <h2>Ventura Blvd & Van Nuys Blvd: Intersection Report</h2>
                     <img src = "pics/venturaVN.JPG" width="70%" height="30%">
+                    <p class = "caption">Looking north along Ventura Blvd from the intersection of Ventura & Van Nuys Blvd</p>
+                    <p class="reportText">
+                        Two of the Valley’s busiest streets meet at this intersection, leading to potential for danger as non-drivers try to navigate the mess of cars. Here, the large number of lanes on the streets leads to confusion for drivers that can be dangerous for pedestrians, especially on Ventura, which has two left-turn lanes turning north onto Van Nuys. There have clearly been some attempts at traffic calming here, with painted medians installed in on two of the four streets leading to the intersection, but more is needed to make the area truly safe for non-drivers. All of the crashes recorded at this intersection have involved pedestrians, not bikers, so the lack of bike lanes is comparatively unimportant in terms of safety (although this may just be luck, or simply due to the fact that few people bike in the neighborhood). Therefore, improvements should focus on making street crossing safer for pedestrians. 
+                        <br><br><b style = "font-family: 'Quicksand', sans-serif">Potential Intersection Safety Improvements:</b>
+                    </p>
+                    <ul>
+                        <li>Add painted median on westbound Ventura Blvd (eliminate one turn lane)</li>
+                        <li>Make traffic light signaling more pedestrian-friendly (ex: change pedestrian sign to “walk” a few seconds before lights turn green)</li>
+                        <ul><li>This has been shown to reduce collisions by <a href = "https://www.sfmta.com/getting-around/walk/pedestrian-improvements-toolkit/pedestrian-signal-improvements">as much as 60%</a>!
+                        </li></ul>
+                        <li>Add protected left turns to northbound Van Nuys and eastbound Ventura</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -72,7 +118,21 @@
             <div id = "hfReport" class = "modal">
                 <div class = "modalContent">
                     <span class="close">&times;</span>
-                    <h2>Highland & Franklin: Intersection Report</h2>
+                    <h2>Highland Ave & Franklin Ave: Intersection Report</h2>
+                    <img src = "pics/highlandFranklin.jpeg" width="70%" height="25%">
+                    <p class = "caption">Looking east on Franklin Ave from the intersection of Highland Ave & Franklin</p>
+                    <p class="reportText">
+                        This intersection is the only of the top 5 most dangerous that’s located outside of the Valley; in fact, it’s located right at the southern border of the district where CD4 meets CD13. The intersection has seen 7 crashes, all involving pedestrians, in the last four years. Here, Highland Avenue is the busier of the two streets, acting as a major arterial between the 101 freeway and east-west streets like Santa Monica and Wilshire; Franklin St is comparably smaller. 
+                        There are no bike lanes on any of the streets, and there’s a crosswalk missing on the south side of Highland, which likely leads pedestrians to scramble across during a green light, risking injury or worse. Also, the intersection is located in a very busy pedestrian area, meaning that there’s a constant high volume of people needing to get across the intersection despite its subpar infrastructure. 
+                         Highland Ave was selected to be a part of <a href = "https://ladotlivablestreets.org/projects/highland">LADOT's livable streets program</a>, but the selected section ends just south of this intersection (near the CD14 border). 
+                         <br><br><b style = "font-family: 'Quicksand', sans-serif">Potential Intersection Safety Improvements:</b>
+                    </p>
+                    <ul>
+                        <li>Paint a crosswalk on southern side of Highland</li>
+                        <li>Add a physical median to Highland (remove one lane of traffic from northern side of street)</li>
+                        <li>Add bike lanes to Highland Ave</li>
+                        <li>Extend the Livable Streets Program north to this intersection (and beyond to the 101)</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -84,6 +144,19 @@
                     <span class="close">&times;</span>
                     <h2>Burbank & Van Nuys: Intersection Report</h2>
                     <img src = "pics/burbankVN.JPG" width="70%" height="30%">
+                    <p class = "caption">Looking south on Van Nuys Blvd from the intersection of Burbank Ave & Van Nuys</p>
+                    <p class = "reportText">
+                        This intersection in the Valley has the most street safety measures of the top 5 most dangerous intersections in the district; in part because of that, only one person has been seriously injured there in the past 4 years, and nobody has been killed. The streets comprising the intersection are still wide and busy, but they both have measures like bike lanes (some of which are protected) that increase safety for non drivers. Van Nuys Blvd also has a median, which both reduces traffic and forces drivers to pay more attention to their surroundings. Some of the bike lanes are marked through the intersection, which is helpful, but several also end before the intersection even starts (to allow cars to turn right). 
+                        <br><br><b style = "font-family: 'Quicksand', sans-serif">Potential Intersection Safety Improvements:</b>
+                    </p>
+                    <ul>
+                        <li>Extend all bike lanes through intersection</li>
+                        <li>Make traffic light signaling more pedestrian-friendly (ex: change pedestrian sign to “walk” a few seconds before lights turn green)</li>
+                        <ul><li>This has been shown to reduce collisions by <a href = "https://www.sfmta.com/getting-around/walk/pedestrian-improvements-toolkit/pedestrian-signal-improvements">as much as 60%</a>!
+                        </li></ul>
+                        <li>Bonus: Add diagonal crosswalks & all-way walk signals
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

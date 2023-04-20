@@ -1,11 +1,19 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@400&family=Quicksand:wght@600;700&display=swap');
 
 
 #map { height: 520px; }
 
-p, h2{
+h2, h1, ul{
     font-family: 'Quicksand', sans-serif;
+}
+ul{
+    text-align: left;
+}
+
+p{
+    font-family: 'Anuphan', sans-serif;
 }
 
 .caption{
@@ -16,6 +24,8 @@ p, h2{
 
 .reportText{
     text-align: left;
+    text-indent: 3%;
+
 }
 
 b{
@@ -124,4 +134,15 @@ b{
   border-color: #008296;
   box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
   outline: 0;
+}
+
+.topWrapper{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+.three{
+    /* display: flex;
+    align-items: flex-end;
+    justify-content: flex-end; */
+    text-align: right;
 }
